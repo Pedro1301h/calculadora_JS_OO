@@ -1,17 +1,14 @@
 class Calculator{
-    constructor(){  //executado quando objeto é instanciado
+    constructor(){  
         this.upperValue = document.querySelector('#upper-number');
         this.resultValue = document.querySelector('#result-number');
-        this.reset = 0;      //para limpar número digitados anteriormente
+        this.reset = 0;      
     }
 
-    //Ativa funcionalidade de limpar o display na tecla AC
     clearValues(){
         this.upperValue.textContent = '0'
         this.resultValue.textContent = '0'
     }
-
-    //Checa se precisa adicionar ou não. Permite adicionar apenas um símbolo após número
 
     checkLastDigit(input, upperValue, reg){
         if((
@@ -37,19 +34,13 @@ class Calculator{
         return parseFloat(n1) / parseFloat(n2)
     }
 
-    //Zera os valores do visor após operação
     refreshTotais(total){
         this.resultValue.textContent = total
         this.upperValue.textContent = total
     }
 
-    //resolve a operação
     resolution(){
-    //    console.log('teste')     
-
-    //espalha a string do input em array
-        let upperValueArray = (this.upperValue.textContent).split(" ") //Quando encontra um espaço 
-        // console.log(upperValueArray)
+        let upperValueArray = (this.upperValue.textContent).split(" ")
 
         let result = 0
 
@@ -61,14 +52,13 @@ class Calculator{
             let val1= upperValueArray[i-1]
             let val2= upperValueArray[i+1]
 
-            //ordem de precedência das operações:
             if(actualItem == 'x'){
                 result = calc.multiplicar(val1,val2)
                 operation = 1
             }else if(actualItem == '/'){
                 result = calc.dividivir(val1,val2)
                 operation = 1
-                //caso não exista divisão nem multiplicação:
+
             }else if(!upperValueArray.includes('x') && !upperValueArray.includes('/')){
                 if(actualItem == '+'){
                     result = calc.somar(val1,val2)
@@ -79,40 +69,29 @@ class Calculator{
                 }
             }
 
-            //atualiza o valor do operador para próxima iteração
             if(operation){
-                //indice anterior do resultado da operação
+
                 upperValueArray[i-1] = result
-                //remove os elementos já utilizados para operação
                 upperValueArray.splice(i,2)
-                //atualizar o valor do índice
                 i = 0
             }
         }
 
-        if(result){ //== true
-            calc.reset = 1      //reset = true
+        if(result){
+            calc.reset = 1     
         }
-
-        //Zera os valores do visor após operação
         calc.refreshTotais(result)
     }
 
-    btnPress(){     //método para todos os botões
-        //console.log(this)   //this - revela qual botão foi pressionado
-        let input = this.textContent        //Exibe o texto que tem dentro do elemento. No caso, os números de cada botão
-        //console.log(input)
-        let upperValue = calc.upperValue.textContent    //Exibindo o valor mostrado no visor da calculadora
-
-        //Verifica se o botão pressionado é um número ou símbolo. Utilizando RegEx
-
-        var reg = new RegExp('^\\d+$')      //Aceitar apenas números
+    btnPress(){     
+        let input = this.textContent        
+        let upperValue = calc.upperValue.textContent    
+        var reg = new RegExp('^\\d+$')      
 
         if(calc.reset && reg.test(input)){
             upperValue = '0'
         }
 
-        //limpa a propriedade de reset
         calc.reset = 0
 
         if (input == 'AC') {
@@ -124,21 +103,17 @@ class Calculator{
         
         
         else {
-            //Checa se precisa adicionar ou não. Permite adicionar apenas um símbolo após número
-
+            
             if(calc.checkLastDigit(input, upperValue, reg)){
                 return false
             }
-
-            //adiciona espaço entre os operadores
-            if(!reg.test(input)){   //se não for número
+            if(!reg.test(input)){   
                 input = ` ${input} `
             }
 
-            //Verificando se está inciando com 0 no visor. Se sim,elimina-o
             if(upperValue == '0'){
-                if(reg.test(input)){    //SE a primeira tecla for número
-                    calc.upperValue.textContent = input     //Exibir tecla digitada no visor da calculadora
+                if(reg.test(input)){   
+                    calc.upperValue.textContent = input     
                 }
             }else{
                 calc.upperValue.textContent += input
@@ -149,21 +124,10 @@ class Calculator{
 
 }
 
-
-
-//Start Object
-
 let calc = new Calculator()
-
-//start btns
-
 let buttons = document.querySelectorAll('.btn');
 
-//console.log(buttons);
-
-//map all buttons - Adicionando evento de clique em todos os botões
-
 for(let i=0;i<buttons.length;i++){
-    buttons[i].addEventListener('click',calc.btnPress); //Atrelando o evento de clique ao método do objeto "btnPress". Evita criar um método para cada botão
+    buttons[i].addEventListener('click',calc.btnPress); 
 }
 

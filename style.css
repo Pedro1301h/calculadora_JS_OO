@@ -1,12 +1,4 @@
 
-
-/*section general*/
-
-/* body, h1, p, span{
-    margin:0;
-    font-family: 'Montserrat', sans-serif;
-} */
-
 *{
     margin:0;
     padding: 0;
@@ -40,19 +32,19 @@ h1{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px;
-    width: 258px;       /*largura para vigorar a centralização*/
+    width: 258px;       
     height: 70px;
     border: 1px solid #354357;
     text-align: right;
     padding: 10px;
 
     box-sizing: border-box;
-    overflow: hidden;           /*esconde o excesso de caracteres digitados no visor da calculadora*/
-    white-space: nowrap;        /*para que a linha não seja quebrada quando o limite da caixa for atingido*/
+    overflow: hidden;          
+    white-space: nowrap;       
 }
 
 #upper-number, #result-number{
-    float: right;               /*Número sempre colados à direita. Ou seja, sempre que for inserido um número, os anteriores serão empurrados para esquerda*/
+    float: right;               
     color: #FFF;
 }
 
@@ -60,9 +52,8 @@ h1{
     font-weight: bold;      
     margin-top: 5px;
     font-size: 22px;
-    clear: both;            /*Evita que os elementos flutuem*/
+    clear: both;            
 }
-
 
 /* buttons*/
 
@@ -86,7 +77,7 @@ h1{
     border-radius:10px;
     font-weight: bold;
     font-size: 18px;
-    display: inline-block;  /*botão ao lado do outro*/
+    display: inline-block; 
     cursor: pointer;
 }
 
@@ -99,8 +90,8 @@ h1{
 }
 
 #division-btn{
-    position: absolute;     /*para que as configurações do botaão AC não interfiram nessas*/
-    right: 14px;            /*tomar essa distância da direita*/
+    position: absolute;     
+    right: 14px;            
 }
 
 #zero-btn, #equals-btn{
